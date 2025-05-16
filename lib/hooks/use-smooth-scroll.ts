@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
-import { usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 function smoothScrollTo(element: Element | null) {
   if (!element) return
@@ -18,7 +18,6 @@ function smoothScrollTo(element: Element | null) {
 
 export function useSmoothScroll() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   useEffect(() => {
     const handleHash = () => {
@@ -50,5 +49,5 @@ export function useSmoothScroll() {
     return () => {
       document.removeEventListener("click", handleClick)
     }
-  }, [pathname, searchParams])
+  }, [pathname])
 } 
