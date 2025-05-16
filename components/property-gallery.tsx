@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,6 +14,25 @@ export default function PropertyGallery({ images }: PropertyGalleryProps) {
   const [prevIndex, setPrevIndex] = useState(0);
   const [direction, setDirection] = useState<'left' | 'right'>('right');
   const [hasInteracted, setHasInteracted] = useState(false);
+  const [preloaded, setPreloaded] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    const preloadImage = (url: string) => {
+      if (!preloaded.has(url)) {
+        const img = new window.Image();
+        img.src = url;
+        img.onload = () => {
+          setPreloaded(prev => new Set(prev).add(url));
+        };
+      }
+    };
+
+    const nextIndex = (currentIndex + 1) % images.length;
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+
+    preloadImage(images[nextIndex]);
+    preloadImage(images[prevIndex]);
+  }, [currentIndex, images, preloaded]);
 
   const goToPrevious = () => {
     setDirection('left');
@@ -49,6 +68,7 @@ export default function PropertyGallery({ images }: PropertyGalleryProps) {
               src={images[prevIndex] || '/placeholder.svg'}
               alt={`Property image ${prevIndex + 1}`}
               fill
+              priority={currentIndex <= 2}
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               className='object-cover'
               quality={85}
