@@ -1,14 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { MapPin, MessageCircle } from "lucide-react"
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+import { MapPin } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa"
 
 interface PropertyActionsProps {
   location: string
@@ -34,7 +28,7 @@ export function PropertyActions({ location, phoneNumber }: PropertyActionsProps)
         className="flex items-center gap-2"
         onClick={handleMapClick}
       >
-        <MapPin className="h-4 w-4" />
+        <MapPin style={{ width: '20px', height: '20px' }} className="text-red-500" />
         View Location
       </Button>
 
@@ -43,7 +37,7 @@ export function PropertyActions({ location, phoneNumber }: PropertyActionsProps)
         className="flex items-center gap-2"
         onClick={handleWhatsAppClick}
       >
-        <MessageCircle className="h-4 w-4" />
+        <FaWhatsapp style={{ width: '20px', height: '20px' }} className="text-[#25D366]" />
         Contact on WhatsApp
       </Button>
     </div>
