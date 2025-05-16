@@ -49,8 +49,10 @@ export default function PropertyGallery({ images }: PropertyGalleryProps) {
               src={images[prevIndex] || '/placeholder.svg'}
               alt={`Property image ${prevIndex + 1}`}
               fill
+              sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               className='object-cover'
-              priority
+              quality={85}
+              loading='lazy'
             />
           </div>
         )}
@@ -65,8 +67,11 @@ export default function PropertyGallery({ images }: PropertyGalleryProps) {
             src={images[currentIndex] || '/placeholder.svg'}
             alt={`Property image ${currentIndex + 1}`}
             fill
+            sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
             className='object-cover'
-            priority
+            priority={currentIndex === 0}
+            quality={85}
+            loading={currentIndex === 0 ? 'eager' : 'lazy'}
           />
         </div>
 
@@ -104,7 +109,15 @@ export default function PropertyGallery({ images }: PropertyGalleryProps) {
             key={index}
             className={`relative aspect-[4/3] overflow-hidden rounded-md ${index === currentIndex ? 'ring-2 ring-primary' : ''}`}
             onClick={() => goToImage(index)}>
-            <Image src={image || '/placeholder.svg'} alt={`Property thumbnail ${index + 1}`} fill className='object-cover' />
+            <Image
+              src={image || '/placeholder.svg'}
+              alt={`Property thumbnail ${index + 1}`}
+              fill
+              sizes='(max-width: 768px) 20vw, 15vw'
+              className='object-cover'
+              quality={60}
+              loading='lazy'
+            />
           </button>
         ))}
       </div>
