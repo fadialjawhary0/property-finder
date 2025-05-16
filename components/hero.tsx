@@ -27,12 +27,14 @@ export default function Hero() {
                 <Link
                   href="#properties"
                   className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+                  scroll={false}
                 >
                   Browse Properties
                 </Link>
                 <Link
                   href="#contact"
                   className="inline-flex h-10 items-center justify-center rounded-md border border-white bg-transparent px-8 text-sm font-medium text-white shadow-sm transition-colors hover:bg-white/20"
+                  scroll={false}
                 >
                   Contact Us
                 </Link>

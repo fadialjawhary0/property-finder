@@ -16,7 +16,7 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <header className="sticky top-0 z-40 w-full border-b bg-background">
         <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2" scroll={false}>
             <span className="text-xl font-bold">PropertyFinder</span>
           </Link>
           <nav className="hidden md:flex gap-6">
