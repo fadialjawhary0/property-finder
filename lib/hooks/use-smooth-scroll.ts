@@ -1,12 +1,11 @@
 "use client"
 
 import { useEffect } from "react"
-import { usePathname } from "next/navigation"
 
 function smoothScrollTo(element: Element | null) {
   if (!element) return
 
-  const headerOffset = 64 
+  const headerOffset = 64
   const elementPosition = element.getBoundingClientRect().top
   const offsetPosition = elementPosition + window.pageYOffset - headerOffset
 
@@ -17,18 +16,14 @@ function smoothScrollTo(element: Element | null) {
 }
 
 export function useSmoothScroll() {
-  const pathname = usePathname()
-
   useEffect(() => {
-    const handleHash = () => {
-      if (window.location.hash) {
-        const targetElement = document.querySelector(window.location.hash)
-        setTimeout(() => smoothScrollTo(targetElement), 100)
-      }
+    // Handle initial hash
+    if (window.location.hash) {
+      const targetElement = document.querySelector(window.location.hash)
+      setTimeout(() => smoothScrollTo(targetElement), 100)
     }
 
-    handleHash()
-
+    // Handle click events
     const handleClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement
       const link = target.closest("a")
@@ -38,16 +33,27 @@ export function useSmoothScroll() {
         const targetElement = document.querySelector(link.hash)
         
         if (targetElement) {
+          // Update URL without triggering a page reload
           window.history.pushState(null, "", link.hash)
           smoothScrollTo(targetElement)
         }
       }
     }
 
+    // Handle browser back/forward buttons
+    const handlePopState = () => {
+      if (window.location.hash) {
+        const targetElement = document.querySelector(window.location.hash)
+        smoothScrollTo(targetElement)
+      }
+    }
+
     document.addEventListener("click", handleClick)
+    window.addEventListener("popstate", handlePopState)
 
     return () => {
       document.removeEventListener("click", handleClick)
+      window.removeEventListener("popstate", handlePopState)
     }
-  }, [pathname])
+  }, [])
 } 
