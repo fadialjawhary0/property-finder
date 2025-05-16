@@ -55,6 +55,9 @@ export default function PropertyPage({ params }: PropertyPageProps) {
             </div>
             <div className="mt-4">
               <p className="text-3xl font-bold">${property.price.toLocaleString()}</p>
+              {property.type === "For Rent" && property.annualPrice && (
+                <p className="text-lg text-muted-foreground">${property.annualPrice.toLocaleString()}/year</p>
+              )}
             </div>
           </div>
 

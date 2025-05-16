@@ -4,6 +4,7 @@ export interface Property {
   price: number
   location: string
   bedrooms: number
+  annualPrice?: number
   bathrooms: number
   area: number
   type: "For Sale" | "For Rent"
@@ -85,6 +86,7 @@ export const properties: Property[] = [
     id: 3,
     title: "Beachfront Condo",
     price: 4500,
+    annualPrice: 54000,
     location: "JBR, Dubai", 
     bedrooms: 3,
     bathrooms: 3,
@@ -151,6 +153,7 @@ export const properties: Property[] = [
     id: 5,
     title: "Penthouse with Panoramic Views",
     price: 7500,
+    annualPrice: 90000,
     location: "Marina, Dubai",
     bedrooms: 4,
     bathrooms: 4,
@@ -183,12 +186,13 @@ export const properties: Property[] = [
   {
     id: 6,
     title: "Townhouse with Private Garden",
-    price: 750000,
+    price: 1200,
+    annualPrice: 14400,
     location: "Jumeirah Village Circle, Dubai",
     bedrooms: 3,
     bathrooms: 3,
     area: 2200,
-    type: "For Sale",
+    type: "For Rent",
     image: "/townhouse-exterior.jpg",
     images: [
       "/townhouse-exterior.jpg",
@@ -250,6 +254,7 @@ export const properties: Property[] = [
     id: 8,
     title: "Modern Studio in Business Bay",
     price: 2800,
+    annualPrice: 33600,
     location: "Business Bay, Dubai",
     bedrooms: 0,
     bathrooms: 1,
