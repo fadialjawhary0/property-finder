@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import PropertyGallery from "@/components/property-gallery"
 import PropertyContactForm from "@/components/property-contact-form"
 import { getPropertyById } from "@/lib/data"
+import { PropertyActions } from "@/components/property-actions"
 
 interface PropertyPageProps {
   params: {
@@ -58,6 +59,9 @@ export default function PropertyPage({ params }: PropertyPageProps) {
               {property.type === "For Rent" && property.annualPrice && (
                 <p className="text-lg text-muted-foreground">${property.annualPrice.toLocaleString()}/year</p>
               )}
+            </div>
+            <div className="mt-4">
+              <PropertyActions location={property.location} phoneNumber={property.phoneNumber} />
             </div>
           </div>
 

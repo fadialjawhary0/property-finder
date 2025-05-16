@@ -2,9 +2,9 @@ export interface Property {
   id: number
   title: string
   price: number
+  annualPrice?: number
   location: string
   bedrooms: number
-  annualPrice?: number
   bathrooms: number
   area: number
   type: "For Sale" | "For Rent"
@@ -13,6 +13,7 @@ export interface Property {
   description: string
   features: string[]
   yearBuilt: number
+  phoneNumber: string
 }
 
 export const properties: Property[] = [
@@ -48,6 +49,7 @@ export const properties: Property[] = [
       "Beach Access",
     ],
     yearBuilt: 2020,
+    phoneNumber: "+962790680585",
   },
   {
     id: 2,
@@ -81,6 +83,7 @@ export const properties: Property[] = [
       "Central A/C",
     ],
     yearBuilt: 2018,
+    phoneNumber: "+962790680585",
   },
   {
     id: 3,
@@ -115,6 +118,7 @@ export const properties: Property[] = [
       "Pet-Friendly",
     ],
     yearBuilt: 2016,
+    phoneNumber: "+962790680585",
   },
   {
     id: 4,
@@ -148,6 +152,7 @@ export const properties: Property[] = [
       "Close to Schools",
     ],
     yearBuilt: 2015,
+    phoneNumber: "+962790680585",
   },
   {
     id: 5,
@@ -182,6 +187,7 @@ export const properties: Property[] = [
       "High Ceilings",
     ],
     yearBuilt: 2019,
+    phoneNumber: "+962790680585",
   },
   {
     id: 6,
@@ -216,6 +222,7 @@ export const properties: Property[] = [
       "Near Schools",
     ],
     yearBuilt: 2017,
+    phoneNumber: "+962790680585",
   },
   {
     id: 7,
@@ -249,6 +256,7 @@ export const properties: Property[] = [
       "Multiple Terraces",
     ],
     yearBuilt: 2021,
+    phoneNumber: "+962790680585",
   },
   {
     id: 8,
@@ -283,6 +291,7 @@ export const properties: Property[] = [
       "High-speed Internet",
     ],
     yearBuilt: 2019,
+    phoneNumber: "+962790680585",
   },
   {
     id: 9,
@@ -316,6 +325,7 @@ export const properties: Property[] = [
       "24/7 Security",
     ],
     yearBuilt: 2016,
+    phoneNumber: "+962790680585",
   },
 ]
 

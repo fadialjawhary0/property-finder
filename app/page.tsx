@@ -8,9 +8,35 @@ import ContactSection from "@/components/contact-section"
 import NeighborhoodSection from "@/components/neighborhood-section"
 import TestimonialSection from "@/components/testimonial-section"
 import { useSmoothScroll } from "@/lib/hooks/use-smooth-scroll"
+import { useState } from "react"
+import { PropertyFilters } from "@/components/property-filters"
+import { Property } from "@/lib/data"
 
 export default function Home() {
   useSmoothScroll()
+  const [filteredProperties, setFilteredProperties] = useState<Property[]>(properties)
+
+  const handleFilterChange = (type: "For Sale" | "For Rent" | "All", search: string) => {
+    let filtered = properties
+
+    // Filter by type
+    if (type !== "All") {
+      filtered = filtered.filter((property) => property.type === type)
+    }
+
+    // Filter by search
+    if (search) {
+      const searchLower = search.toLowerCase()
+      filtered = filtered.filter(
+        (property) =>
+          property.title.toLowerCase().includes(searchLower) ||
+          property.location.toLowerCase().includes(searchLower) ||
+          property.description.toLowerCase().includes(searchLower)
+      )
+    }
+
+    setFilteredProperties(filtered)
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -51,26 +77,21 @@ export default function Home() {
         <Hero />
 
         <section id="properties" className="container py-12 md:py-16">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <div className="space-y-2">
+          <div className="space-y-8">
+            <div className="flex flex-col items-center justify-center space-y-2 text-center">
               <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Featured Properties</h2>
               <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
-                Explore our selection of premium properties in the most desirable locations.
+                Discover our selection of premium properties
               </p>
             </div>
-          </div>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {properties.slice(0, 6).map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Link
-              href="#all-properties"
-              className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-            >
-              View All Properties
-            </Link>
+
+            <PropertyFilters onFilterChange={handleFilterChange} />
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredProperties.map((property) => (
+                <PropertyCard key={property.id} property={property} />
+              ))}
+            </div>
           </div>
         </section>
 
