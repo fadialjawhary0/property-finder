@@ -12,10 +12,15 @@ interface PropertyCardProps {
 
 export default function PropertyCard({ property }: PropertyCardProps) {
   const handleWhatsAppClick = (e: React.MouseEvent) => {
-    e.preventDefault() // Prevent the card link from being triggered
+    e.preventDefault() 
     const message = `Hello, I'm interested in the property at ${property.location}`
     const whatsappUrl = `https://wa.me/${property.phoneNumber}?text=${encodeURIComponent(message)}`
     window.open(whatsappUrl, '_blank')
+  }
+
+  const handleMapClick = (e: React.MouseEvent) => {
+    e.preventDefault() 
+    window.open("https://maps.app.goo.gl/3USuJEqVQQFDCqAQ8", '_blank')
   }
 
   return (
@@ -33,9 +38,9 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               <h3 className="font-semibold text-lg line-clamp-1">{property.title}</h3>
               <div className="text-right">
                 <p className="font-bold text-lg">${property.price.toLocaleString()}</p>
-                {property.type === "For Rent" && property.annualPrice && (
+                {property.type === "For Rent" && property.annualPrice ? (
                   <p className="text-sm text-muted-foreground">${property.annualPrice.toLocaleString()}/year</p>
-                )}
+                ) : <p>‎ </p>}
               </div>
             </div>
             <div className="flex items-center text-muted-foreground">
@@ -59,13 +64,34 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               <span>{property.area} sqft</span>
             </div>
           </div>
-          <button
-            onClick={handleWhatsAppClick}
-            className="p-2 hover:bg-accent rounded-full transition-colors"
-            title="Contact on WhatsApp"
-          >
-            <FaWhatsapp style={{ width: '20px', height: '20px' }} className="text-[#25D366]" />
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={handleMapClick}
+              className="group relative p-2 rounded-full transition-all duration-300 hover:bg-red-50"
+            >
+              <div className="absolute inset-0 rounded-full bg-red-500/10 scale-0 group-hover:scale-100 transition-transform duration-300" />
+              <MapPin 
+                style={{ width: '20px', height: '20px' }} 
+                className="text-red-500 transition-all duration-300  " 
+              />
+              <span className="absolute w-20 -bottom-5 left-1/2 -translate-x-1/2 text-xs text-red-500 font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-1">
+                View Map
+              </span>
+            </button>
+            <button
+              onClick={handleWhatsAppClick}
+              className="group relative p-2 rounded-full transition-all duration-300 hover:bg-[#25D366]/10"
+            >
+              <div className="absolute inset-0 rounded-full bg-[#25D366]/10 scale-0 group-hover:scale-100 transition-transform duration-300" />
+              <FaWhatsapp 
+                style={{ width: '20px', height: '20px' }} 
+                className="text-[#25D366] transition-all duration-300  " 
+              />
+              <span className="absolute w-20 -bottom-5 left-1/2 -translate-x-1/2 text-xs text-[#25D366] font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-1">
+                Chat Now
+              </span>
+            </button>
+          </div>
         </CardFooter>
       </Card>
     </Link>
