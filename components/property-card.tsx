@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Bed, Bath, MapPin, Maximize2 } from "lucide-react"
+import { FaWhatsapp } from "react-icons/fa"
 import type { Property } from "@/lib/data"
 
 interface PropertyCardProps {
@@ -10,6 +11,13 @@ interface PropertyCardProps {
 }
 
 export default function PropertyCard({ property }: PropertyCardProps) {
+  const handleWhatsAppClick = (e: React.MouseEvent) => {
+    e.preventDefault() // Prevent the card link from being triggered
+    const message = `Hello, I'm interested in the property at ${property.location}`
+    const whatsappUrl = `https://wa.me/${property.phoneNumber}?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
+  }
+
   return (
     <Link href={`/property/${property.id}`} className="block transition-transform hover:scale-[1.02] cursor-pointer">
       <Card className="overflow-hidden h-full">
@@ -36,7 +44,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="p-4 pt-0 flex justify-between">
+        <CardFooter className="p-4 pt-0 flex justify-between items-center">
           <div className="flex space-x-4 text-sm">
             <div className="flex items-center">
               <Bed className="mr-1 h-4 w-4" />
@@ -51,6 +59,13 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               <span>{property.area} sqft</span>
             </div>
           </div>
+          <button
+            onClick={handleWhatsAppClick}
+            className="p-2 hover:bg-accent rounded-full transition-colors"
+            title="Contact on WhatsApp"
+          >
+            <FaWhatsapp style={{ width: '20px', height: '20px' }} className="text-[#25D366]" />
+          </button>
         </CardFooter>
       </Card>
     </Link>
