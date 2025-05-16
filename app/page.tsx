@@ -20,19 +20,19 @@ export default function Home() {
             <span className="text-xl font-bold">PropertyFinder</span>
           </Link>
           <nav className="hidden md:flex gap-6">
-            <Link href="#properties" className="text-sm font-medium transition-colors hover:text-primary">
+            <Link href="#properties" className="text-sm font-medium transition-colors hover:text-primary" scroll={false}>
               Properties
             </Link>
-            <Link href="#neighborhoods" className="text-sm font-medium transition-colors hover:text-primary">
+            <Link href="#neighborhoods" className="text-sm font-medium transition-colors hover:text-primary" scroll={false}>
               Neighborhoods
             </Link>
-            <Link href="#testimonials" className="text-sm font-medium transition-colors hover:text-primary">
+            <Link href="#testimonials" className="text-sm font-medium transition-colors hover:text-primary" scroll={false}>
               Testimonials
             </Link>
-            <Link href="#about" className="text-sm font-medium transition-colors hover:text-primary">
+            <Link href="#about" className="text-sm font-medium transition-colors hover:text-primary" scroll={false}>
               About
             </Link>
-            <Link href="#contact" className="text-sm font-medium transition-colors hover:text-primary">
+            <Link href="#contact" className="text-sm font-medium transition-colors hover:text-primary" scroll={false}>
               Contact
             </Link>
           </nav>
@@ -40,6 +40,7 @@ export default function Home() {
             <Link
               href="#contact"
               className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow hover:bg-primary/90"
+              scroll={false}
             >
               Contact Us
             </Link>
