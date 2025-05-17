@@ -73,12 +73,12 @@ export default function PropertyPage({ params }: PropertyPageProps) {
               <div className='flex flex-col items-center justify-center p-4 bg-muted rounded-lg'>
                 <Bed className='h-5 w-5 mb-2' />
                 <span className='text-sm text-muted-foreground'>Bedrooms</span>
-                <span className='font-medium'>{property.bedrooms}</span>
+                <span className='font-medium'>{property.bedrooms || '-'}</span>
               </div>
               <div className='flex flex-col items-center justify-center p-4 bg-muted rounded-lg'>
                 <Bath className='h-5 w-5 mb-2' />
-                <span className='text-sm text-muted-foreground'>Bathrooms</span>
-                <span className='font-medium'>{property.bathrooms}</span>
+                <span className='text-sm text-muted-foreground'>Toilets</span>
+                <span className='font-medium'>{property.toilets || '-'}</span>
               </div>
               <div className='flex flex-col items-center justify-center p-4 bg-muted rounded-lg'>
                 <Maximize2 className='h-5 w-5 mb-2' />

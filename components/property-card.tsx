@@ -67,11 +67,11 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           <div className='flex space-x-4 text-sm'>
             <div className='flex items-center'>
               <Bed className='mr-1 h-4 w-4' />
-              <span>{property.bedrooms}</span>
+              <span>{property.bedrooms || '-'}</span>
             </div>
             <div className='flex items-center'>
               <Bath className='mr-1 h-4 w-4' />
-              <span>{property.bathrooms}</span>
+              <span>{property.toilets || '-'}</span>
             </div>
             <div className='flex items-center'>
               <Maximize2 className='mr-1 h-4 w-4' />

@@ -15,9 +15,14 @@ import { Property } from '@/lib/data';
 export default function Home() {
   useSmoothScroll();
   const [filteredProperties, setFilteredProperties] = useState<Property[]>(properties);
+  const [currentType, setCurrentType] = useState<'For Sale' | 'For Rent' | 'All'>('All');
+  const [currentSearch, setCurrentSearch] = useState('');
 
   const handleFilterChange = (type: 'For Sale' | 'For Rent' | 'All', search: string) => {
     let filtered = properties;
+
+    setCurrentType(type);
+    setCurrentSearch(search);
 
     // Filter by type
     if (type !== 'All') {
@@ -84,11 +89,21 @@ export default function Home() {
 
             <PropertyFilters onFilterChange={handleFilterChange} />
 
-            <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
-              {filteredProperties.map(property => (
-                <PropertyCard key={property.id} property={property} />
-              ))}
-            </div>
+            {filteredProperties.length === 0 ? (
+              <div className='text-center text-muted-foreground text-lg py-12'>
+                {currentType === 'For Rent'
+                  ? 'There are no rent properties.'
+                  : currentType === 'For Sale'
+                  ? 'There are no sale properties.'
+                  : 'No properties found for your search.'}
+              </div>
+            ) : (
+              <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+                {filteredProperties.map(property => (
+                  <PropertyCard key={property.id} property={property} />
+                ))}
+              </div>
+            )}
           </div>
         </section>
 
