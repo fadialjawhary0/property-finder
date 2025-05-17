@@ -6,11 +6,10 @@ export default function Hero() {
     <section className='relative'>
       <div className='relative h-[600px] w-full overflow-hidden'>
         <Image
-          src='/luxury-mansion-exterior.png'
+          src='/luxury-mansion-exterior.jpg'
           alt='Luxury real estate property with modern architecture'
-          width={1920}
-          height={600}
-          className='object-cover w-full h-full'
+          fill
+          className='object-cover w-full h-full object-center'
           priority
         />
         <div className='absolute inset-0 bg-black/40' />
