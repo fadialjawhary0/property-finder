@@ -42,7 +42,9 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         <CardContent className='p-4'>
           <div className='space-y-2'>
             <div className='flex items-start justify-between'>
-              <h3 className='font-semibold text-lg line-clamp-1'>{property.title}</h3>
+              <h3 className='font-semibold text-lg max-w-[300px] line-clamp-2' title={property.title}>
+                {property.title}
+              </h3>
               <div className='text-right'>
                 <p className='font-bold text-lg'>${property.price.toLocaleString()}</p>
                 {property.type === 'For Rent' && property.annualPrice ? (
