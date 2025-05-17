@@ -20,7 +20,10 @@ export default function PropertyCard({ property }: PropertyCardProps) {
 
   const handleMapClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.open('https://maps.app.goo.gl/3USuJEqVQQFDCqAQ8', '_blank');
+    window.open(
+      'https://www.google.com/maps/place/Yamadadai,+Yachimata,+Chiba+289-1124,+Japan/@35.580286,140.2927041,2102m/data=!3m1!1e3!4m6!3m5!1s0x6022946a7d15c391:0x9beeaa1e6c3a8447!8m2!3d35.5786938!4d140.2875709!16s%2Fg%2F1pxxx9c9v?entry=ttu&g_ep=EgoyMDI1MDUxMy4xIKXMDSoASAFQAw%3D%3D',
+      '_blank',
+    );
   };
 
   return (

@@ -62,13 +62,14 @@ export const properties: Property[] = [
   },
   {
     id: 2,
-    title: 'Kawaba 1-building apartment for sale',
-    price: 21200000,
+    title: 'Kawaba 1-building apartment for rent',
+    price: 224000,
+    annualPrice: 2688000,
     location: 'Kawaba, Togane City, Chiba Prefecture',
     bedrooms: 4,
     bathrooms: 2,
     area: 238.48,
-    type: 'For Sale',
+    type: 'For Rent',
     image: '/exterior-2.jpg',
     images: [
       { url: '/exterior-2.jpg', title: 'Exterior' },
@@ -77,14 +78,13 @@ export const properties: Property[] = [
       { url: '/floor-plan-2.jpg', title: 'Floor Plan' },
     ],
     description:
-      '2-storey steel frame apartment with 4 rooms, located in Kawaba, Togane City, Chiba Prefecture. Used area: 238.48㎡, land area: 226.23㎡. For rent (all). Parking available. Ownership. Built in November 1988 (35 years old). Immediate consultation for delivery.',
+      '2-storey steel frame apartment for rent with 4 rooms, located in Kawaba, Togane City, Chiba Prefecture. Monthly rent: 224,000 yen. Used area: 238.48㎡, land area: 226.23㎡. Parking available. Ownership. Built in November 1988 (35 years old). Immediate consultation for delivery.',
     features: [
       '2-storey',
       'Steel Frame',
       '4 Rooms',
       'Parking Available',
       'Bike Parking',
-      'For Rent (all)',
       'Ownership',
       'Residential Land',
       'Immediate Consultation for Delivery',
@@ -156,11 +156,11 @@ export const properties: Property[] = [
   {
     id: 4,
     title: 'Oamishirasato City Kimimonori Used Detached House',
-    price: 17800000, // 17.8 million yen
+    price: 17800000,
     location: '2-chome, Kimimonoriminami, Oamishirasato City, Chiba Prefecture',
     bedrooms: 4,
-    bathrooms: 3, // not specified, keep as is
-    area: 109.88, // building area
+    bathrooms: 3,
+    area: 109.88,
     type: 'For Sale',
     image: '/exterior-4.jpg',
     images: [
@@ -213,12 +213,12 @@ export const properties: Property[] = [
   {
     id: 5,
     title: 'ComZ Village Tama',
-    price: 37500000, // 37.5 million yen
-    annualPrice: undefined, // not specified
+    price: 37500000,
+    annualPrice: undefined,
     location: 'Tama, Togane City, Chiba Prefecture',
-    bedrooms: 3, // 3LDK
-    bathrooms: 4, // not specified, keep as is
-    area: 90.46, // building area
+    bedrooms: 3,
+    bathrooms: 4,
+    area: 90.46,
     type: 'For Sale',
     image: '/exterior-5.jpg',
     images: [
@@ -275,13 +275,13 @@ export const properties: Property[] = [
   {
     id: 6,
     title: 'Naruto 2M-1',
-    price: 37800000, // 37.8 million yen
-    annualPrice: undefined, // not specified
+    price: 220000,
+    annualPrice: 2640000,
     location: 'Naruto, Sanmu City, Chiba Prefecture',
-    bedrooms: 3, // 3LDK
-    bathrooms: 3, // not specified, keep as is
-    area: 126.71, // building area
-    type: 'For Sale',
+    bedrooms: 3,
+    bathrooms: 3,
+    area: 126.71,
+    type: 'For Rent',
     image: '/exterior-6.jpg',
     images: [
       { url: '/exterior-6.jpg', title: 'Exterior' },
@@ -302,7 +302,7 @@ export const properties: Property[] = [
       { url: '/floor-plan-6.jpg', title: 'Floor plan' },
     ],
     description:
-      'Naruto 2M-1 in Naruto, Sanmu City, Chiba Prefecture. 2-storey, wooden structure, 3LDK, building area 126.71㎡, land area 238.19㎡. New construction, built in December 2024. Parking for 2 spaces, reboiling function, 2 or more toilets, low-rise residential area, highly airtight and insulated all-electric house, fully equipped, walk-in closet, and more.',
+      'Naruto 2M-1 in Naruto, Sanmu City, Chiba Prefecture. 2-storey, wooden structure, 3LDK, building area 126.71㎡, land area 238.19㎡. For rent: 220,000 yen/month (example). New construction, built in December 2024. Parking for 2 spaces, reboiling function, 2 or more toilets, low-rise residential area, highly airtight and insulated all-electric house, fully equipped, walk-in closet, and more.',
     features: [
       '3LDK',
       '2-storey',
@@ -322,6 +322,7 @@ export const properties: Property[] = [
       'Ownership',
       '60% Building Coverage Ratio',
       '200% Floor Area Ratio',
+      'Monthly Rent: 220,000 yen',
     ],
     yearBuilt: 2024,
     phoneNumber: '+818033666526',
