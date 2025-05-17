@@ -51,7 +51,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               <div className='text-right'>
                 <p className='font-bold text-lg'>${property.price.toLocaleString()}</p>
                 {property.type === 'For Rent' && property.annualPrice ? (
-                  <p className='text-sm text-muted-foreground'>${property.annualPrice.toLocaleString()}/year</p>
+                  <p className='text-sm text-muted-foreground'>{property.annualPrice.toLocaleString()}Yen/year</p>
                 ) : (
                   <p>‎ </p>
                 )}
