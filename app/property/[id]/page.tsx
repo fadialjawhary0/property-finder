@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ChevronLeft, Bed, Bath, Maximize2, MapPin, Share2, Heart } from 'lucide-react';
+import { ChevronLeft, Bed, Bath, Maximize2, MapPin, Share2, Heart, Building } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -10,13 +10,14 @@ import { getPropertyById } from '@/lib/data';
 import { PropertyActions } from '@/components/property-actions';
 
 interface PropertyPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
-export default function PropertyPage({ params }: PropertyPageProps) {
-  const property = getPropertyById(Number.parseInt(params.id));
+export default async function PropertyPage({ params }: PropertyPageProps) {
+  const { id } = await params;
+  const property = getPropertyById(Number.parseInt(id));
 
   if (!property) {
     notFound();
@@ -55,13 +56,13 @@ export default function PropertyPage({ params }: PropertyPageProps) {
               <p>{property.location}</p>
             </div>
             <div className='mt-4'>
-              <p className='text-3xl font-bold'>{property.price.toLocaleString()} Yen</p>
+              <p className='text-3xl font-bold'>{property.price ? `${property.price.toLocaleString()} Yen` : 'Contact for price'}</p>
               {property.type === 'For Rent' && property.annualPrice && (
                 <p className='text-lg text-muted-foreground'>{property.annualPrice.toLocaleString()} Yen/year</p>
               )}
             </div>
             <div className='mt-4'>
-              <PropertyActions location={property.location} phoneNumber={property.phoneNumber} />
+              <PropertyActions location={property.location} phoneNumber={property.phoneNumber} googleMapsUrl={property.googleMapsUrl} />
             </div>
           </div>
 
@@ -73,21 +74,22 @@ export default function PropertyPage({ params }: PropertyPageProps) {
               <div className='flex flex-col items-center justify-center p-4 bg-muted rounded-lg'>
                 <Bed className='h-5 w-5 mb-2' />
                 <span className='text-sm text-muted-foreground'>Bedrooms</span>
-                <span className='font-medium'>{property.bedrooms || '-'}</span>
+                <span className='font-medium text-center'>{property.bedrooms || '-'}</span>
               </div>
               <div className='flex flex-col items-center justify-center p-4 bg-muted rounded-lg'>
                 <Bath className='h-5 w-5 mb-2' />
                 <span className='text-sm text-muted-foreground'>Toilets</span>
-                <span className='font-medium'>{property.toilets || '-'}</span>
+                <span className='font-medium text-center'>{property.toilets || '-'}</span>
               </div>
               <div className='flex flex-col items-center justify-center p-4 bg-muted rounded-lg'>
                 <Maximize2 className='h-5 w-5 mb-2' />
                 <span className='text-sm text-muted-foreground'>Area</span>
-                <span className='font-medium'>{property.area} sqft</span>
+                <span className='font-medium text-center'>{property.area} sqft</span>
               </div>
               <div className='flex flex-col items-center justify-center p-4 bg-muted rounded-lg'>
-                <span className='font-medium'>{property.yearBuilt}</span>
+                <Building className='h-5 w-5 mb-2' />
                 <span className='text-sm text-muted-foreground'>Year Built</span>
+                <span className='font-medium text-center'>{property.yearBuilt}</span>
               </div>
             </div>
 

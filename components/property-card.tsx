@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Bed, Bath, MapPin, Maximize2 } from 'lucide-react';
+import { Bed, Bath, MapPin, Maximize2, Building } from 'lucide-react';
 import { FaWhatsapp } from 'react-icons/fa';
 import type { Property } from '@/lib/data';
 
@@ -18,12 +18,16 @@ export default function PropertyCard({ property }: PropertyCardProps) {
     window.open(whatsappUrl, '_blank');
   };
 
-  const handleMapClick = (e: React.MouseEvent) => {
+  const handleMapClick = (e: React.MouseEvent, googleMapsUrl: string | undefined) => {
     e.preventDefault();
-    window.open(
-      'https://www.google.com/maps/place/Yamadadai,+Yachimata,+Chiba+289-1124,+Japan/@35.580286,140.2927041,2102m/data=!3m1!1e3!4m6!3m5!1s0x6022946a7d15c391:0x9beeaa1e6c3a8447!8m2!3d35.5786938!4d140.2875709!16s%2Fg%2F1pxxx9c9v?entry=ttu&g_ep=EgoyMDI1MDUxMy4xIKXMDSoASAFQAw%3D%3D',
-      '_blank',
-    );
+    if (googleMapsUrl) {
+      window.open(googleMapsUrl, '_blank');
+    } else {
+      window.open(
+        'https://www.google.com/maps/place/Yamadadai,+Yachimata,+Chiba+289-1124,+Japan/@35.580286,140.2927041,2102m/data=!3m1!1e3!4m6!3m5!1s0x6022946a7d15c391:0x9beeaa1e6c3a8447!8m2!3d35.5786938!4d140.2875709!16s%2Fg%2F1pxxx9c9v?entry=ttu&g_ep=EgoyMDI1MDUxMy4xIKXMDSoASAFQAw%3D%3D',
+        '_blank',
+      );
+    }
   };
 
   return (
@@ -49,7 +53,9 @@ export default function PropertyCard({ property }: PropertyCardProps) {
                 {property.title}
               </h3>
               <div className='text-right'>
-                <p className='font-bold text-lg'>{property.price.toLocaleString()} Yen</p>
+                <p className='font-bold text-lg text-center'>
+                  {property.price ? `${property.price.toLocaleString()} Yen` : 'Contact for price'}
+                </p>
                 {property.type === 'For Rent' && property.annualPrice ? (
                   <p className='text-sm text-muted-foreground'>{property.annualPrice.toLocaleString()} Yen/year</p>
                 ) : (
@@ -67,19 +73,37 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           <div className='flex space-x-4 text-sm'>
             <div className='flex items-center'>
               <Bed className='mr-1 h-4 w-4' />
-              <span>{property.bedrooms || '-'}</span>
+              <span>
+                {typeof property.bedrooms === 'string' && property.bedrooms.includes('Please contact') ? '-' : property.bedrooms || '-'}
+              </span>
             </div>
             <div className='flex items-center'>
               <Bath className='mr-1 h-4 w-4' />
-              <span>{property.toilets || '-'}</span>
+              <span>
+                {typeof property.toilets === 'string' && property.toilets.includes('Please contact') ? '-' : property.toilets || '-'}
+              </span>
             </div>
             <div className='flex items-center'>
               <Maximize2 className='mr-1 h-4 w-4' />
-              <span>{property.area} sqft</span>
+              <span>
+                {typeof property.area === 'string' && property.area.includes('Please contact')
+                  ? '-'
+                  : property.area
+                  ? `${property.area} sqft`
+                  : '-'}
+              </span>
+            </div>
+            <div className='flex items-center'>
+              <Building className='mr-1 h-4 w-4' />
+              <span>
+                {typeof property.yearBuilt === 'string' && property.yearBuilt.includes('Please contact') ? '-' : property.yearBuilt || '-'}
+              </span>
             </div>
           </div>
           <div className='flex gap-2'>
-            <button onClick={handleMapClick} className='group relative p-2 rounded-full transition-all duration-300 hover:bg-red-50'>
+            <button
+              onClick={e => handleMapClick(e, property.googleMapsUrl)}
+              className='group relative p-2 rounded-full transition-all duration-300 hover:bg-red-50'>
               <div className='absolute inset-0 rounded-full bg-red-500/10 scale-0 group-hover:scale-100 transition-transform duration-300' />
               <MapPin style={{ width: '20px', height: '20px' }} className='text-red-500 transition-all duration-300  ' />
               <span className='absolute w-20 -bottom-5 left-1/2 -translate-x-1/2 text-xs text-red-500 font-medium opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-1'>
@@ -87,7 +111,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
               </span>
             </button>
             <button
-              onClick={handleWhatsAppClick}
+              onClick={e => handleWhatsAppClick(e)}
               className='group relative p-2 rounded-full transition-all duration-300 hover:bg-[#25D366]/10'>
               <div className='absolute inset-0 rounded-full bg-[#25D366]/10 scale-0 group-hover:scale-100 transition-transform duration-300' />
               <FaWhatsapp style={{ width: '20px', height: '20px' }} className='text-[#25D366] transition-all duration-300  ' />

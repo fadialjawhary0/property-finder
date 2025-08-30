@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface PropertyGalleryProps {
-  images: { url: string; title: string }[];
+  images: { url: string; title: string | undefined }[];
 }
 
 export default function PropertyGallery({ images }: PropertyGalleryProps) {
@@ -69,7 +69,7 @@ export default function PropertyGallery({ images }: PropertyGalleryProps) {
               } cursor-pointer`}>
               <Image
                 src={images[prevIndex].url || '/placeholder.svg'}
-                alt={`Property image ${prevIndex + 1} - ${images[prevIndex].title}`}
+                alt={`Property image ${prevIndex + 1} - ${images[prevIndex].title || ''}`}
                 fill
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                 className='object-cover'
@@ -88,15 +88,17 @@ export default function PropertyGallery({ images }: PropertyGalleryProps) {
             <div className='relative w-full h-full cursor-pointer' onClick={() => setIsModalOpen(true)}>
               <Image
                 src={images[currentIndex].url || '/placeholder.svg'}
-                alt={`Property image ${currentIndex + 1} - ${images[currentIndex].title}`}
+                alt={`Property image ${currentIndex + 1} - ${images[currentIndex].title || ''}`}
                 fill
                 className='object-cover cursor-pointer'
                 priority={currentIndex === 0}
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
               />
-              <div className='absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4 z-30 pointer-events-none'>
-                <h3 className='text-lg font-medium'>{images[currentIndex].title}</h3>
-              </div>
+              {images[currentIndex].title && (
+                <div className='absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4 z-30 pointer-events-none'>
+                  <h3 className='text-lg font-medium'>{images[currentIndex].title}</h3>
+                </div>
+              )}
             </div>
           </div>
 
